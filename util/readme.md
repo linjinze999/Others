@@ -1,0 +1,63 @@
+## COMMON.JS说明文档
+#### 导语
+> 对common.js的作用进行阐述。
+
+## 一、默认执行
+1. bootstrap-datepicker：日期控件汉化
+2. multipleSelect：默认参数修改
+
+## 二、通用工具
+> 所有通用工具都封装在全局JSON变量**common**中，使用时可如此引用：
+        
+        common.XXX();
+1. post
+  - 描述：使用AJAX.post进行请求，对错误结果进行处理。
+  - 输入：
+    - 类型：json
+    - 字段：
+      - url：请求地址（String，必需）
+      - cb：请求成功后的回调函数（function(data)，必需）
+      - param：请求参数（Json，非必需）
+      - sync：是否同步（Boolean，非必需，默认否）
+      - complete：请求结束的回调函数（function，非必需）
+  - 输出：无
+2. searchEcharts
+  - 描述：结果为Echarts展示的post。
+  - 输入：
+    - 类型：json
+    - 字段：
+      - button：请求时禁用的按钮ID（String，必需）
+      - echarts：Echarts初始化的元素ID（String，必需）
+      - url：请求地址（String，必需）
+      - cb：请求成功后的回调函数（function(data)，必需）
+      - param：请求参数（Json，非必需）
+      - sync：是否同步（Boolean，非必需，默认否）
+      - complete：请求结束的回调函数（function，非必需）
+   - 输出：
+     - 请求时：禁用按钮，Echarts显示加载中；
+     - 请求后：恢复按钮，展示Echarts。
+3. dialog
+  - 描述：提示框
+  - 输入
+    - 类型：json
+    - 字段：
+      - title：标题（String，必需）
+      - content：文本描述（String，必需，支持html）
+  - 输出：提示框
+4. recordForm
+  - 描述：记录Form表单内所有的输入信息
+  - 输入：form的id（String，必需）
+  - 输出：localStorage记录表单输入
+5. loadForm
+  - 描述：恢复Form表单上次的输入信息
+  - 输入：form的id（String，必需）
+  - 输出：恢复Form表单上次的输入信息
+6. getForm
+  - 描述：获得Form表单的所有输入值
+  - 输入：form的id（String，必需）
+  - 输出：
+    - 类型：json
+    - 字段
+      - key：input的name
+      - value： input的value
+    - 示例：'{user:"test",password:"test",children:["ch1","ch2"]}'

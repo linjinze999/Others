@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Common test</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="./multiple-select/multiple-select.css" rel="stylesheet"/>;
+	<link href="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+	
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.common.min.js"></script>
+	<script src="./multiple-select/multiple-select.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+	<script src="./common.js"></script>
+  </head>
+  <body>
+    <!-- card -->
+    <div class="cm-card2">
+	    <p>nihao</p>
+	</div>
+	
+	<!-- datepicker -->
+	<p>
+		<input class="datepicker">
+	</p>
+	
+	<!-- multipleSelect -->
+	<p>
+		<select multiple="multiple">
+			<optgroup label="组别1">
+				<option value="1_1">选项1_1</option>
+				<option value="1_2">选项1_2</option>
+				<option value="1_3">选项1_3</option>
+				<option value="1_4">选项1_4</option>
+				<option value="1_5">选项1_5</option>
+			</optgroup>
+			<optgroup label="组别2">
+				<option value="2_1">选项2_1</option>
+				<option value="2_2">选项2_2</option>
+				<option value="2_3">选项2_3</option>
+				<option value="2_4">选项2_4</option>
+				<option value="2_5">选项2_5</option>
+			</optgroup>
+		</select>
+	</p>
+	
+	<!-- modal -->
+	<p>
+		<button type="button" class="btn btn-primary" onClick="dialog()">提示框</button>
+		<div class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="cmModal">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="dialogTitle"></h4>
+			  </div>
+			  <div class="modal-body" id="dialogContent"></div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</p>
+	
+	<!-- form -->
+	<p>
+		<form id="testForm">
+			<input type="text" name="user"/>
+			<input type="password" name="password"/>
+			<select multiple="multiple" name="test">
+				<optgroup label="组别1">
+					<option value="1_1">选项1_1</option>
+					<option value="1_2">选项1_2</option>
+					<option value="1_3">选项1_3</option>
+					<option value="1_4">选项1_4</option>
+					<option value="1_5">选项1_5</option>
+				</optgroup>
+				<optgroup label="组别2">
+					<option value="2_1">选项2_1</option>
+					<option value="2_2">选项2_2</option>
+					<option value="2_3">选项2_3</option>
+					<option value="2_4">选项2_4</option>
+					<option value="2_5">选项2_5</option>
+				</optgroup>
+			</select>
+			<input type="button" onClick="record()" value="记录"/>
+			<input type="button" onClick="load()" value="重置"/>
+		</form>
+	</p>
+	
+	<p>
+		<div class="cm-card" >
+			<div id="echarts" style="width: 100%;height:400px;border-bottom:1px solid #ccc;"></div>
+			<p>
+			    这里是说明文字
+			</p>
+		</div>
+	</p>
+	
+	<script>
+	  $('.datepicker').datepicker();
+	  $('select').multipleSelect();
+	  function dialog(){
+	      common.dialog();
+	  }
+	  function record(){
+	      common.recordForm("testForm");
+	  }
+	  function load(){
+	      common.loadForm("testForm");
+	  }
+	  
+	  var myChart = echarts.init(document.getElementById('echarts'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+	</script>
+  </body>
+</html>
