@@ -91,6 +91,18 @@
 		</form>
 	</p>
 	
+	<!-- Tab -->
+	<p>
+		<ul class="nav nav-tabs" id="tabs">
+		  <li role="presentation" class="active" data-tab="tab1"><a href="javascript:void(0)">Home</a></li>
+		  <li role="presentation" data-tab="tab2"><a href="javascript:void(0)">Profile</a></li>
+		  <li role="presentation" data-tab="tab3"><a href="javascript:void(0)">Messages</a></li>
+		</ul>
+		<div class="cm-card" id="tab1">tab1</div>
+		<div class="cm-card" id="tab2" style="display:none">tab2</div>
+		<div class="cm-card" id="tab3" style="display:none">tab3</div>
+	</p>
+	<!-- Echarts -->
 	<p>
 		<div class="cm-card" >
 			<div id="echarts" style="width: 100%;height:400px;border-bottom:1px solid #ccc;"></div>
@@ -99,6 +111,7 @@
 			</p>
 		</div>
 	</p>
+	
 	
 	<script>
 	  $('.datepicker').datepicker();
@@ -114,8 +127,6 @@
 	  }
 	  
 	  var myChart = echarts.init(document.getElementById('echarts'));
-
-        // 指定图表的配置项和数据
         var option = {
             title: {
                 text: 'ECharts 入门示例'
@@ -134,9 +145,9 @@
                 data: [5, 20, 36, 10, 10, 20]
             }]
         };
-
-        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
+		
+		common.tabs("tabs");
 	</script>
   </body>
 </html>

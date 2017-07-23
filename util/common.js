@@ -125,5 +125,17 @@ var common = {
 			}
 		});
 		return values;
+	},
+	tabs:function(id){
+		$("#"+id).bind("click",function(e){
+			if(e.target.id != id){
+			    $.each($("#"+id+" > li"),function(i,o){
+					$(o).removeClass("active");
+					$("#"+$(o).attr("data-tab")).hide();
+				});
+				$(e.target).parent().addClass("active");
+				$("#"+$(e.target).parent().attr("data-tab")).show();	
+			}
+		});
 	}
 }
