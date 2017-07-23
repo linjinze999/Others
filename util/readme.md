@@ -61,3 +61,19 @@
       - key：input的name
       - value： input的value
     - 示例：'{user:"test",password:"test",children:["ch1","ch2"]}'
+7. tabs
+  - 描述：控制tab切换
+  - html如下：
+        <div>
+    		<ul class="nav nav-tabs" id="tabs">
+    		  <li role="presentation" class="active" data-tab="tab1"><a href="javascript:void(0)">Home</a></li>
+    		  <li role="presentation" data-tab="tab2"><a href="javascript:void(0)">Profile</a></li>
+    		  <li role="presentation" data-tab="tab3"><a href="javascript:void(0)">Messages</a></li>
+    		</ul>
+    		<div class="cm-card" id="tab1">tab1</div>
+    		<div class="cm-card" id="tab2" style="display:none">tab2</div>
+    		<div class="cm-card" id="tab3" style="display:none">tab3</div>
+    	</div>解释：按照bootstrap形式编写html，在li上添加"data-tab"设置其对应的tab容器id。
+  - js如下：
+         common.tabs("tabs");
+    解释：调用common.tabs()，将ul的**id**作为参数传入即可。
