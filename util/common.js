@@ -1,6 +1,6 @@
 (function(){
 	//日期控件的汉化
-	if(!$.fn.datepicker.dates['cn']){
+	if(!!$.fn.datepicker && !$.fn.datepicker.dates['cn']){
 	    $.fn.datepicker.dates['cn'] = {
 				days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
 				daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
@@ -72,8 +72,13 @@ var common = {
 			param:options.param || {},
 			sync:!!options.sync,
 			cb:function(data){
+				this.recordForm(options.formId);
 				myChart.clear();
-				myChart.setOption(options.cb(data));
+				if(!!options.cb){
+				    myChart.setOption(options.cb(data));	
+				}else{
+				    this.showBarEcharts(Object.assign(data,{id:options.echarts}));	
+				}				
 			},
 			complete:function(){
 				$('#'+options.button).removeattr("disabled");
@@ -137,5 +142,71 @@ var common = {
 				$("#"+$(e.target).parent().attr("data-tab")).show();	
 			}
 		});
+	},
+	showBarEcharts:function(option){
+		var myChart = echarts.init(document.getElementById(option.id));
+        var option = {
+			title : {
+				text: option.config.title || "未命名"
+			},
+			tooltip : {
+				trigger: 'axis'
+			},
+			legend: {
+				data:(function(){
+					var _result = [];
+					$.each(option.config.items,function(_i,_o){
+						_result.push(_o.name);
+					});
+					return _result;
+				})()
+			},
+			toolbox: {
+				show : true,
+				feature : {
+					mark : {show: false},
+					dataView : {show: true, readOnly: false},
+					magicType : {show: true, type: ['line', 'bar']},
+					restore : {show: true},
+					saveAsImage : {show: true}
+				}
+			},
+			calculable : true,
+			xAxis : [
+				{
+					type : 'category',
+					data : option.config.xText
+				}
+			],
+			yAxis : [
+				{
+					type : 'value',
+				    name : "单位：" + (option.config.yUnit||"%")
+				}
+			],
+			series : (function(){
+				var _result = [];
+				$.each(option.config.items,function(_i,_o){
+					_result.push({
+						name:_o.name,
+						type:"bar",
+						data:_o.data,
+						markPoint : {
+							data : [
+								{type : 'max', name: '最大值'},
+								{type : 'min', name: '最小值'}
+							]
+						},
+						markLine : {
+							data : [
+								{type : 'average', name: '平均值'}
+							]
+						}
+					});
+				});
+				return _result;
+			})()
+		};
+        myChart.setOption(option);
 	}
 }
